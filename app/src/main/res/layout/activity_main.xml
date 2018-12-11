@@ -10,20 +10,61 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:gravity="center"
         android:orientation="vertical"
-        android:gravity="center">
+        android:background="@color/white"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
 
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@mipmap/ic_launcher_foreground"
-            android:scaleType="centerInside"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
             android:adjustViewBounds="true"
+            android:scaleType="centerInside"
+            app:srcCompat="@drawable/panaderia_logo" />
+
+        <Button
+            android:id="@+id/btnOrders"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:text="Pedidos"
+            android:background="@drawable/button_bg"
+            android:layout_margin="20dp"
+            android:textStyle="bold"
+            />
+
+        <Button
+            android:id="@+id/btnProducts"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_bg"
+            android:layout_margin="20dp"
+            android:text="Productos"
+            android:textStyle="bold"
+            />
+
+        <Button
+            android:id="@+id/btnSalesData"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_bg"
+            android:layout_margin="20dp"
+            android:text="Datos de ventas"
+            android:textStyle="bold"
+            />
+
+        <Button
+            android:id="@+id/btnUsers"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_bg"
+            android:layout_margin="20dp"
+            android:text="Usuarios"
+            android:textStyle="bold"
             />
 
     </LinearLayout>
-
-
 
 </android.support.constraint.ConstraintLayout>
