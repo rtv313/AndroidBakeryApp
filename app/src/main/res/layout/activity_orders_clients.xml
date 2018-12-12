@@ -16,9 +16,85 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/toolbar">
-    </LinearLayout>
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_below="@id/toolbar"
+        >
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_below="@id/toolbar"
+            >
+            <Button
+                android:id="@+id/btnClients"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:text="Pedidos"
+                android:textStyle="bold"
+                />
+
+            <Button
+                android:id="@+id/btnProducts"
+                android:layout_width="180dp"
+                android:layout_height="wrap_content"
+                android:text="Productos"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/searchText"
+            android:drawableRight="@drawable/ic_search"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text=""
+            android:hint="Buscar Cliente"
+            android:inputType="text"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_below="@id/toolbar"
+            >
+            <Button
+                android:id="@+id/btnPending"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:text="Pendiente"
+                android:textStyle="bold"
+                />
+
+            <Button
+                android:id="@+id/btnFinished"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:text="Terminado"
+                android:textStyle="bold"
+                />
+
+            <Button
+                android:id="@+id/btnCancel"
+                android:layout_width="125dp"
+                android:layout_height="wrap_content"
+                android:text="Cancelado"
+                android:textStyle="bold"
+                />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/orders_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </ListView>
+
+    </LinearLayout>
 </RelativeLayout>
 
 
