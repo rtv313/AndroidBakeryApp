@@ -34,14 +34,18 @@
                 android:layout_height="wrap_content"
                 android:text="Pedidos"
                 android:textStyle="bold"
+                android:background="@drawable/button_bg"
+                android:layout_margin="5dp"
                 />
 
             <Button
                 android:id="@+id/btnProducts"
                 android:layout_width="180dp"
                 android:layout_height="wrap_content"
-                android:text="Productos"
+                android:text="Resumen pedidos"
                 android:textStyle="bold"
+                android:background="@drawable/button_bg"
+                android:layout_margin="5dp"
                 />
         </LinearLayout>
 
@@ -67,28 +71,35 @@
                 android:id="@+id/btnPending"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
-                android:text="Pendiente"
+                android:text="Pendientes"
                 android:textStyle="bold"
+                android:background="@drawable/button_bg"
+                android:layout_margin="1dp"
                 />
 
             <Button
                 android:id="@+id/btnFinished"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
-                android:text="Terminado"
+                android:text="Terminados"
                 android:textStyle="bold"
+                android:background="@drawable/button_bg"
+                android:layout_margin="1dp"
                 />
 
             <Button
                 android:id="@+id/btnCancel"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
-                android:text="Cancelado"
+                android:text="Cancelados"
                 android:textStyle="bold"
+                android:background="@drawable/button_bg"
+                android:layout_margin="1dp"
                 />
         </LinearLayout>
 
         <ListView
+            android:layout_marginTop="10dp"
             android:id="@+id/orders_list"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
