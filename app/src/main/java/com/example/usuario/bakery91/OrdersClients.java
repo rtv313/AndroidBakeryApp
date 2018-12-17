@@ -1,4 +1,6 @@
 package com.example.usuario.bakery91;
+import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
@@ -13,9 +15,9 @@ import android.widget.TextView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
-import android.widget.Toast;
 
 import java.util.ArrayList;
+
 
 class Order{
     String name;
@@ -29,7 +31,8 @@ public class OrdersClients extends AppCompatActivity implements OnItemClickListe
     ArrayList<Order> pendentOrdersArray;
     ArrayList<Order> finishedOrdersArray;
     ArrayList<Order> canceledOrdersArray;
-
+    ProgressDialog dialog;
+    ArrayList<OrderClient> ordersAbstract = new ArrayList<OrderClient>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +50,9 @@ public class OrdersClients extends AppCompatActivity implements OnItemClickListe
         Button buttonFinished = (Button)findViewById(R.id.btnFinished);
         Button buttonCancel = (Button)findViewById(R.id.btnCancel);
 
+        // Test RESTFUL
+         dialog = new ProgressDialog(OrdersClients.this);
+         new GetOrders(dialog,this,ordersAbstract).execute();
 
         // Lista de ordenes pendientes
         pendentOrdersArray = new ArrayList<Order>();
@@ -169,4 +175,9 @@ class MyAdapter extends BaseAdapter{
         status.setText(ordersArrayList.get(item).status);
         return view;
     }
-}
+} // Adapter End
+
+
+
+
+
