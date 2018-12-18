@@ -42,6 +42,8 @@ public class OrdersClients extends AppCompatActivity implements OnItemClickListe
         Button buttonFinished = (Button)findViewById(R.id.btnFinished);
         Button buttonCancel = (Button)findViewById(R.id.btnCancel);
 
+        buttonPending.setBackgroundResource(R.drawable.button_bg_active);
+        buttonPending.setTextColor(Color.WHITE);
         // Test RESTFUL
         dialog = new ProgressDialog(OrdersClients.this);
         orders =(ListView) findViewById(R.id.orders_list);
@@ -52,6 +54,18 @@ public class OrdersClients extends AppCompatActivity implements OnItemClickListe
             public void onClick(View v) {
                 new GetOrders(dialog,OrdersClients.this,ordersAbstract,"PENDIENTE").execute();
                 status = List_Status.PENDIENTE;
+
+                Button buttonPending = (Button)findViewById(R.id.btnPending);
+                buttonPending.setBackgroundResource(R.drawable.button_bg_active);
+                buttonPending.setTextColor(Color.WHITE);
+
+                Button buttonFinished = (Button)findViewById(R.id.btnFinished);
+                buttonFinished.setBackgroundResource(R.drawable.button_bg);
+                buttonFinished.setTextColor(Color.BLACK);
+
+                Button buttonCancel = (Button)findViewById(R.id.btnCancel);
+                buttonCancel.setBackgroundResource(R.drawable.button_bg);
+                buttonCancel.setTextColor(Color.BLACK);
             }
         });
 
@@ -60,6 +74,18 @@ public class OrdersClients extends AppCompatActivity implements OnItemClickListe
             public void onClick(View v) {
                 new GetOrders(dialog,OrdersClients.this,ordersAbstract,"CANCELADO").execute();
                 status = List_Status.CANCELADO;
+
+                Button buttonPending = (Button)findViewById(R.id.btnPending);
+                buttonPending.setBackgroundResource(R.drawable.button_bg);
+                buttonPending.setTextColor(Color.BLACK);
+
+                Button buttonFinished = (Button)findViewById(R.id.btnFinished);
+                buttonFinished.setBackgroundResource(R.drawable.button_bg);
+                buttonFinished.setTextColor(Color.BLACK);
+
+                Button buttonCancel = (Button)findViewById(R.id.btnCancel);
+                buttonCancel.setBackgroundResource(R.drawable.button_bg_active);
+                buttonCancel.setTextColor(Color.WHITE);
             }
         });
 
@@ -68,6 +94,18 @@ public class OrdersClients extends AppCompatActivity implements OnItemClickListe
             public void onClick(View v) {
                 new GetOrders(dialog,OrdersClients.this,ordersAbstract,"TERMINADO").execute();
                 status = List_Status.TERMINADO;
+
+                Button buttonPending = (Button)findViewById(R.id.btnPending);
+                buttonPending.setBackgroundResource(R.drawable.button_bg);
+                buttonPending.setTextColor(Color.BLACK);
+
+                Button buttonFinished = (Button)findViewById(R.id.btnFinished);
+                buttonFinished.setBackgroundResource(R.drawable.button_bg_active);
+                buttonFinished.setTextColor(Color.WHITE);
+
+                Button buttonCancel = (Button)findViewById(R.id.btnCancel);
+                buttonCancel.setBackgroundResource(R.drawable.button_bg);
+                buttonCancel.setTextColor(Color.BLACK);
             }
         });
 
