@@ -18,19 +18,9 @@ import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
 
-
-class Order{
-    String name;
-    String status;
-}
-
-
 public class OrdersClients extends AppCompatActivity implements OnItemClickListener{
 
     ListView orders;
-    ArrayList<Order> pendentOrdersArray;
-    ArrayList<Order> finishedOrdersArray;
-    ArrayList<Order> canceledOrdersArray;
     ProgressDialog dialog;
     ArrayList<OrderClient> ordersAbstract = new ArrayList<OrderClient>();
     @Override
@@ -51,100 +41,47 @@ public class OrdersClients extends AppCompatActivity implements OnItemClickListe
         Button buttonCancel = (Button)findViewById(R.id.btnCancel);
 
         // Test RESTFUL
-         dialog = new ProgressDialog(OrdersClients.this);
-         new GetOrders(dialog,this,ordersAbstract).execute();
-
-        // Lista de ordenes pendientes
-        pendentOrdersArray = new ArrayList<Order>();
-
-        Order nuevaOrden = new Order();
-        nuevaOrden.name ="Don raro";
-        nuevaOrden.status = "Pendiente";
-
-        Order nuevaOrden2 = new Order();
-        nuevaOrden2.name ="Don raro";
-        nuevaOrden2.status = "Pendiente";
-
-        pendentOrdersArray.add(nuevaOrden);
-        pendentOrdersArray.add(nuevaOrden2);
-
-        // Lista de ordenes Terminadas
-        finishedOrdersArray = new ArrayList<Order>();
-
-        Order nuevaOrdenTerminada = new Order();
-        nuevaOrdenTerminada.name ="Don raro";
-        nuevaOrdenTerminada.status = "Terminada";
-
-        Order nuevaOrdenTerminada2 = new Order();
-        nuevaOrdenTerminada2.name ="Don raro";
-        nuevaOrdenTerminada2.status = "Terminada";
-
-        finishedOrdersArray.add(nuevaOrdenTerminada);
-        finishedOrdersArray.add(nuevaOrdenTerminada2);
-
-        // Lista de ordenes Canceladas
-        canceledOrdersArray = new ArrayList<Order>();
-
-        Order nuevaOrdenCancelada = new Order();
-        nuevaOrdenCancelada.name ="Don raro";
-        nuevaOrdenCancelada.status = "Cancelada";
-
-        Order nuevaOrdenCancelada2 = new Order();
-        nuevaOrdenCancelada2.name ="Don raro";
-        nuevaOrdenCancelada2.status = "Cancelada";
-
-        canceledOrdersArray.add(nuevaOrdenCancelada);
-        canceledOrdersArray.add(nuevaOrdenCancelada2);
-
+        dialog = new ProgressDialog(OrdersClients.this);
         orders =(ListView) findViewById(R.id.orders_list);
-        MyAdapter adapter = new MyAdapter(this,pendentOrdersArray);
-        orders.setAdapter(adapter);
-        orders.setOnItemClickListener(this);
+        new GetOrders(dialog,this,ordersAbstract).execute();
+
+
+        //MyAdapter adapter = new MyAdapter(this,ordersAbstract);
+        //orders.setAdapter(adapter);
+        //orders.setOnItemClickListener(this);
 
         buttonPending.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                orders =(ListView) findViewById(R.id.orders_list);
+               /* orders =(ListView) findViewById(R.id.orders_list);
                 MyAdapter adapter = new MyAdapter(OrdersClients.this,pendentOrdersArray);
                 orders.setAdapter(adapter);
-                orders.setOnItemClickListener(OrdersClients.this);
+                orders.setOnItemClickListener(OrdersClients.this);*/
             }
         });
 
-        buttonFinished.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                orders =(ListView) findViewById(R.id.orders_list);
-                MyAdapter adapter = new MyAdapter(OrdersClients.this,finishedOrdersArray);
-                orders.setAdapter(adapter);
-                orders.setOnItemClickListener(OrdersClients.this);
-            }
-        });
-
-        buttonCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                orders =(ListView) findViewById(R.id.orders_list);
-                MyAdapter adapter = new MyAdapter(OrdersClients.this,canceledOrdersArray);
-                orders.setAdapter(adapter);
-                orders.setOnItemClickListener(OrdersClients.this);
-            }
-        });
     }
 
     @Override
     public void onItemClick(AdapterView<?> av ,View v,int position,long id)
     {
-        Order order = (Order)orders.getItemAtPosition(position);
+        OrderClient order = (OrderClient)orders.getItemAtPosition(position);
+    }
+
+
+    public void createlist() {
+        MyAdapter adapter = new MyAdapter(this,ordersAbstract);
+        orders.setAdapter(adapter);
+        orders.setOnItemClickListener(this);
     }
 }
 
 class MyAdapter extends BaseAdapter{
 
-    ArrayList<Order> ordersArrayList;
+    ArrayList<OrderClient> ordersArrayList;
     LayoutInflater lInflater;
 
-    MyAdapter(Context context,ArrayList<Order> orders){
+    MyAdapter(Context context,ArrayList<OrderClient> orders){
         ordersArrayList = orders;
         lInflater = LayoutInflater.from(context);
     }
@@ -171,8 +108,8 @@ class MyAdapter extends BaseAdapter{
         TextView clientName = view.findViewById(R.id.textViewClient);
         TextView status = view.findViewById(R.id.textViewStatus);
 
-        clientName.setText(ordersArrayList.get(item).name);
-        status.setText(ordersArrayList.get(item).status);
+        clientName.setText(ordersArrayList.get(item).Name);
+        status.setText(ordersArrayList.get(item).Status);
         return view;
     }
 } // Adapter End

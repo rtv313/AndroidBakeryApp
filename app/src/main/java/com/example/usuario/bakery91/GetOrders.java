@@ -1,7 +1,6 @@
 package com.example.usuario.bakery91;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 import android.widget.ListView;
@@ -10,8 +9,11 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -22,17 +24,17 @@ import static android.content.ContentValues.TAG;
 
 class GetOrders extends AsyncTask {
 
-    private Context OrdersClients;
+    private OrdersClients ContextOrderClients;
     private ProgressDialog progressDialog;
     private StringBuffer response;
     private String responseText;
     private ListView ordersList;
     private ArrayList<OrderClient> orders;
 
-    public GetOrders(ProgressDialog progressDialog,Context OrderClients,ArrayList<OrderClient> orders)
+    public GetOrders(ProgressDialog progressDialog,OrdersClients ContextOrderClients,ArrayList<OrderClient> orders)
     {
         this.progressDialog = progressDialog;
-        this.OrdersClients = OrderClients;
+        this.ContextOrderClients = ContextOrderClients;
         this.orders = orders;
     }
 
@@ -41,8 +43,8 @@ class GetOrders extends AsyncTask {
         super.onPreExecute();
 
         // Showing progress dialog
-        progressDialog = new ProgressDialog(OrdersClients);
-        progressDialog.setMessage("Cargando Ordenes");
+        progressDialog = new ProgressDialog(ContextOrderClients);
+        progressDialog.setMessage("Cargando Pedidos");
         progressDialog.setCancelable(false);
         progressDialog.show();
 
@@ -50,7 +52,6 @@ class GetOrders extends AsyncTask {
 
     @Override
     protected Object doInBackground(Object[] objects) {
-        int hola= 0;
         return getWebServiceResponseData();
     }
 
@@ -62,22 +63,31 @@ class GetOrders extends AsyncTask {
         // Dismiss the progress dialog
         if (progressDialog.isShowing())
             progressDialog.dismiss();
-        // For populating list data debo terminar de llenar los datos
 
+        ContextOrderClients.createlist();
     }
 
 
-    protected Void getWebServiceResponseData() {
+    protected Void getWebServiceResponseData(){
 
         try {
+
+            JSONObject ordersParameters = new JSONObject();
+            ordersParameters.put("Status","PENDIENTE");
+
             URL url;
-            String path = "https://splendid-stingray-43.localtunnel.me/Orders";
+            String path = "https://young-moth-42.localtunnel.me/Orders/";
             url = new URL(path);
             Log.d(TAG, "ServerData: " + path);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
+
+            conn.setRequestProperty("Content-Type","application/json");
+            conn.setRequestProperty("Authorization","Token 89f39b9d21b410971637dc5a76d60ab85a3a8da8");
+
             conn.setReadTimeout(15000);
             conn.setConnectTimeout(15000);
-            conn.setRequestMethod("GET");
+            conn.setRequestMethod("PUT");
 
             int responseCode = conn.getResponseCode();
 
