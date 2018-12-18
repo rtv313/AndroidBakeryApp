@@ -30,12 +30,15 @@ class GetOrders extends AsyncTask {
     private String responseText;
     private ListView ordersList;
     private ArrayList<OrderClient> orders;
+    private String orderStatus;
 
-    public GetOrders(ProgressDialog progressDialog,OrdersClients ContextOrderClients,ArrayList<OrderClient> orders)
+    public GetOrders(ProgressDialog progressDialog,OrdersClients ContextOrderClients,ArrayList<OrderClient> orders,String orderStatus)
     {
         this.progressDialog = progressDialog;
         this.ContextOrderClients = ContextOrderClients;
         this.orders = orders;
+        this.orderStatus = orderStatus;
+
     }
 
     @Override
@@ -47,7 +50,7 @@ class GetOrders extends AsyncTask {
         progressDialog.setMessage("Cargando Pedidos");
         progressDialog.setCancelable(false);
         progressDialog.show();
-
+        orders.clear();
     }
 
     @Override
@@ -73,10 +76,10 @@ class GetOrders extends AsyncTask {
         try {
 
             JSONObject ordersParameters = new JSONObject();
-            ordersParameters.put("Status","PENDIENTE");
+            ordersParameters.put("Status",orderStatus);
 
             URL url;
-            String path = "https://splendid-fly-96.localtunnel.me/Orders/";
+            String path = "https://nasty-goat-42.localtunnel.me/Orders/";
             url = new URL(path);
 
             Log.d(TAG, "ServerData: " + path);

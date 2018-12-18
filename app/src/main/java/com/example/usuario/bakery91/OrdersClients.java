@@ -1,5 +1,4 @@
 package com.example.usuario.bakery91;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -19,10 +18,13 @@ import android.widget.BaseAdapter;
 import java.util.ArrayList;
 
 public class OrdersClients extends AppCompatActivity implements OnItemClickListener{
-
+    public enum List_Status {PENDIENTE,CANCELADO,TERMINADO}
     ListView orders;
     ProgressDialog dialog;
     ArrayList<OrderClient> ordersAbstract = new ArrayList<OrderClient>();
+    List_Status status = List_Status.PENDIENTE;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,22 +45,33 @@ public class OrdersClients extends AppCompatActivity implements OnItemClickListe
         // Test RESTFUL
         dialog = new ProgressDialog(OrdersClients.this);
         orders =(ListView) findViewById(R.id.orders_list);
-        new GetOrders(dialog,this,ordersAbstract).execute();
-
-
-        //MyAdapter adapter = new MyAdapter(this,ordersAbstract);
-        //orders.setAdapter(adapter);
-        //orders.setOnItemClickListener(this);
+        new GetOrders(dialog,this,ordersAbstract,"PENDIENTE").execute();
 
         buttonPending.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               /* orders =(ListView) findViewById(R.id.orders_list);
-                MyAdapter adapter = new MyAdapter(OrdersClients.this,pendentOrdersArray);
-                orders.setAdapter(adapter);
-                orders.setOnItemClickListener(OrdersClients.this);*/
+                new GetOrders(dialog,OrdersClients.this,ordersAbstract,"PENDIENTE").execute();
+                status = List_Status.PENDIENTE;
             }
         });
+
+        buttonCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new GetOrders(dialog,OrdersClients.this,ordersAbstract,"CANCELADO").execute();
+                status = List_Status.CANCELADO;
+            }
+        });
+
+        buttonFinished.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new GetOrders(dialog,OrdersClients.this,ordersAbstract,"TERMINADO").execute();
+                status = List_Status.TERMINADO;
+            }
+        });
+
+
 
     }
 
