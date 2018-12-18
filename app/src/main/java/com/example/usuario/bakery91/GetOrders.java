@@ -76,18 +76,23 @@ class GetOrders extends AsyncTask {
             ordersParameters.put("Status","PENDIENTE");
 
             URL url;
-            String path = "https://young-moth-42.localtunnel.me/Orders/";
+            String path = "https://splendid-fly-96.localtunnel.me/Orders/";
             url = new URL(path);
+
             Log.d(TAG, "ServerData: " + path);
+
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-
-
-            conn.setRequestProperty("Content-Type","application/json");
-            conn.setRequestProperty("Authorization","Token 89f39b9d21b410971637dc5a76d60ab85a3a8da8");
-
             conn.setReadTimeout(15000);
             conn.setConnectTimeout(15000);
             conn.setRequestMethod("PUT");
+            conn.setRequestProperty("Content-Type","application/json");
+            conn.setRequestProperty("Authorization","Token 89f39b9d21b410971637dc5a76d60ab85a3a8da8");
+            conn.setDoOutput(true);
+            OutputStream os = conn.getOutputStream();
+            String json = ordersParameters.toString();
+            os.write(json.getBytes());
+            os.flush();
+            os.close();
 
             int responseCode = conn.getResponseCode();
 
