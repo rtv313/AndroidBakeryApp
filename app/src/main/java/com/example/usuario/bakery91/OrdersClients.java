@@ -5,10 +5,14 @@ import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.AdapterView;
@@ -22,6 +26,7 @@ public class OrdersClients extends AppCompatActivity implements OnItemClickListe
     ListView orders;
     ProgressDialog dialog;
     ArrayList<OrderClient> ordersAbstract = new ArrayList<OrderClient>();
+    ArrayList<OrderClient> ordersAbstractFilter = new ArrayList<OrderClient>();
     List_Status status = List_Status.PENDIENTE;
 
 
@@ -41,6 +46,7 @@ public class OrdersClients extends AppCompatActivity implements OnItemClickListe
         Button buttonPending = (Button)findViewById(R.id.btnPending);
         Button buttonFinished = (Button)findViewById(R.id.btnFinished);
         Button buttonCancel = (Button)findViewById(R.id.btnCancel);
+        EditText searchBox = (EditText)findViewById(R.id.searchText);
 
         buttonPending.setBackgroundResource(R.drawable.button_bg_active);
         buttonPending.setTextColor(Color.WHITE);
@@ -109,24 +115,57 @@ public class OrdersClients extends AppCompatActivity implements OnItemClickListe
             }
         });
 
+        searchBox.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                OrdersClients.this.filterList(s.toString());
+            }
+        });
 
     }
 
     @Override
-    public void onItemClick(AdapterView<?> av ,View v,int position,long id)
-    {
+    public void onItemClick(AdapterView<?> av ,View v,int position,long id){
         OrderClient order = (OrderClient)orders.getItemAtPosition(position);
     }
 
 
     public void createlist() {
-        MyAdapter adapter = new MyAdapter(this,ordersAbstract);
+        MyAdapter adapter = new MyAdapter(this, ordersAbstract);
         orders.setAdapter(adapter);
         orders.setOnItemClickListener(this);
+        EditText searchBox = (EditText)findViewById(R.id.searchText);
+        filterList(searchBox.getText().toString());
+    }
+
+    public void filterList(String filterText ){
+
+        ordersAbstractFilter.clear();
+
+        for(int i=0; i < ordersAbstract.size(); i++)
+        {
+            OrderClient filterItem =  ordersAbstract.get(i);
+            if(filterItem.getName().toLowerCase().contains(filterText.toLowerCase()) || filterItem.getLastName().toLowerCase().contains(filterText.toLowerCase())){
+                ordersAbstractFilter.add(filterItem);
+            }
+        }
+
+        MyAdapter adapter = new MyAdapter(OrdersClients.this,ordersAbstractFilter);
+        orders.setAdapter(adapter);
+        orders.setOnItemClickListener(OrdersClients.this);
     }
 }
-
+// My Adapter
 class MyAdapter extends BaseAdapter{
 
     ArrayList<OrderClient> ordersArrayList;
@@ -158,9 +197,15 @@ class MyAdapter extends BaseAdapter{
         view = lInflater.inflate(R.layout.order_row,null);
         TextView clientName = view.findViewById(R.id.textViewClient);
         TextView status = view.findViewById(R.id.textViewStatus);
+        OrderClient clientItem =ordersArrayList.get(item);
+        clientName.setText(clientItem.getName() +" "+ clientItem.getLastName());
+        status.setText(clientItem.getStatus());
 
-        clientName.setText(ordersArrayList.get(item).Name);
-        status.setText(ordersArrayList.get(item).Status);
+        LinearLayout linearLayout = view.findViewById(R.id.linearLayout);
+
+        if(item % 2 == 0)
+            linearLayout.setBackgroundColor(Color.parseColor("#e7e8e5"));
+
         return view;
     }
 } // Adapter End

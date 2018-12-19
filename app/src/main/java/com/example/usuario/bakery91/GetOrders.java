@@ -79,10 +79,10 @@ class GetOrders extends AsyncTask {
             ordersParameters.put("Status",orderStatus);
 
             URL url;
-            String path = "https://nasty-goat-42.localtunnel.me/Orders/";
+            String path = "https://heavy-cow-80.localtunnel.me/Orders/";
             url = new URL(path);
-
             Log.d(TAG, "ServerData: " + path);
+
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(15000);

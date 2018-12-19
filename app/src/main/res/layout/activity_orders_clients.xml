@@ -30,6 +30,7 @@
             android:text=""
             android:hint="Buscar Cliente"
             android:inputType="text"
+            android:imeOptions="actionSearch"
             />
 
         <LinearLayout
