@@ -155,7 +155,8 @@ public class OrdersClients extends AppCompatActivity implements OnItemClickListe
         for(int i=0; i < ordersAbstract.size(); i++)
         {
             OrderClient filterItem =  ordersAbstract.get(i);
-            if(filterItem.getName().toLowerCase().contains(filterText.toLowerCase()) || filterItem.getLastName().toLowerCase().contains(filterText.toLowerCase())){
+            String fullName = filterItem.getName()+ filterItem.getLastName();
+            if(fullName.toLowerCase().contains(filterText.toLowerCase())){
                 ordersAbstractFilter.add(filterItem);
             }
         }
@@ -196,11 +197,8 @@ class MyAdapter extends BaseAdapter{
 
         view = lInflater.inflate(R.layout.order_row,null);
         TextView clientName = view.findViewById(R.id.textViewClient);
-        TextView status = view.findViewById(R.id.textViewStatus);
         OrderClient clientItem =ordersArrayList.get(item);
         clientName.setText(clientItem.getName() +" "+ clientItem.getLastName());
-        status.setText(clientItem.getStatus());
-
         LinearLayout linearLayout = view.findViewById(R.id.linearLayout);
 
         if(item % 2 == 0)
