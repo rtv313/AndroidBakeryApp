@@ -6,6 +6,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.google.firebase.messaging.FirebaseMessaging;
+
+
 public class MainActivity extends AppCompatActivity {
     Button buttonOrders,buttonProducts,buttonSalesData,buttonUsers;
     @Override
@@ -17,6 +20,8 @@ public class MainActivity extends AppCompatActivity {
         buttonProducts = (Button)findViewById(R.id.btnProducts);
         buttonSalesData = (Button)findViewById(R.id.btnSalesData);
         buttonUsers = (Button)findViewById(R.id.btnUsers);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("NuevosPedidos");
 
         buttonOrders.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         buttonUsers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                MyNotificationManager.getInstance(MainActivity.this).displayNotification("Greetings", "Hello how are you?");
                 Toast.makeText(MainActivity.this,"Usuarios Menu",Toast.LENGTH_LONG).show();
             }
         });

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "34216364170",
+    "firebase_url": "https://bakery91.firebaseio.com",
+    "project_id": "bakery91",
+    "storage_bucket": "bakery91.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:34216364170:android:1ddb273147adc32c",
+        "android_client_info": {
+          "package_name": "com.example.usuario.bakery91"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "34216364170-j7vrqgr3u342a3l8v706nm25o8o3tknr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.usuario.bakery91",
+            "certificate_hash": "74a66feb5311bf533ba21168aaa080e7b8342b78"
+          }
+        },
+        {
+          "client_id": "34216364170-b00um6c88mprlv60f38po552977r5a99.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD7iP8UT9F19pHtb0kUL5noBmIDPHBvpFE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "34216364170-b00um6c88mprlv60f38po552977r5a99.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
