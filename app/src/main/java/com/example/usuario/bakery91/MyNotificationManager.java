@@ -64,7 +64,7 @@ public class MyNotificationManager {
                         .setSound(sound)
                         .setVibrate(vibrationPattern);
 
-        Intent resultIntent = new Intent(mCtx, MainActivity.class);
+        Intent resultIntent = new Intent(mCtx,OrdersClients.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(mCtx, 0, resultIntent, PendingIntent.FLAG_UPDATE_CURRENT);
         mBuilder.setContentIntent(pendingIntent);
 

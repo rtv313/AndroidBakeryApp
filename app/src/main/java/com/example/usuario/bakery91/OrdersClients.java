@@ -1,6 +1,7 @@
 package com.example.usuario.bakery91;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -28,7 +30,6 @@ public class OrdersClients extends AppCompatActivity implements OnItemClickListe
     ArrayList<OrderClient> ordersAbstract = new ArrayList<OrderClient>();
     ArrayList<OrderClient> ordersAbstractFilter = new ArrayList<OrderClient>();
     List_Status status = List_Status.PENDIENTE;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +136,14 @@ public class OrdersClients extends AppCompatActivity implements OnItemClickListe
     }
 
     @Override
+    public void onBackPressed()
+    {
+        super.onBackPressed();
+        startActivity(new Intent(this, MainActivity.class));
+        finish();
+    }
+
+    @Override
     public void onItemClick(AdapterView<?> av ,View v,int position,long id){
         OrderClient order = (OrderClient)orders.getItemAtPosition(position);
     }
@@ -146,6 +155,10 @@ public class OrdersClients extends AppCompatActivity implements OnItemClickListe
         orders.setOnItemClickListener(this);
         EditText searchBox = (EditText)findViewById(R.id.searchText);
         filterList(searchBox.getText().toString());
+    }
+
+    public void NoInternetAlert(){
+        Toast.makeText(this,"No hay internet, conectate para ver tus pedidos",Toast.LENGTH_LONG).show();
     }
 
     public void filterList(String filterText ){
