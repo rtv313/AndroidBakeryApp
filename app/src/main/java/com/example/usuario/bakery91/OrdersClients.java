@@ -136,6 +136,9 @@ public class OrdersClients extends ActivityWithMenu implements OnItemClickListen
     @Override
     public void onItemClick(AdapterView<?> av ,View v,int position,long id){
         OrderClient order = (OrderClient)orders.getItemAtPosition(position);
+        Intent intent = new Intent(OrdersClients.this, OrderActivity.class);
+        intent.putExtra("OrderId",order.getId());
+        startActivity(intent);
     }
 
 
