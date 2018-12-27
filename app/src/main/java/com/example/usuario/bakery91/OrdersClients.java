@@ -126,7 +126,6 @@ public class OrdersClients extends AppCompatActivity implements OnItemClickListe
                 OrdersClients.this.filterList(s.toString());
             }
         });
-
     }
 
     @Override
