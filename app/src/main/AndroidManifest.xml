@@ -44,7 +44,7 @@
         </service>
 
         <activity
-            android:name=".MenuTutorial"
+            android:name=".ActivityWithMenu"
             android:label="@string/title_activity_menu_tutorial"
             android:theme="@style/AppTheme"></activity>
     </application>

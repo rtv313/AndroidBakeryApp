@@ -3,7 +3,6 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -22,7 +21,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class OrdersClients extends AppCompatActivity implements OnItemClickListener{
+public class OrdersClients extends ActivityWithMenu implements OnItemClickListener{
     public enum List_Status {PENDIENTE,CANCELADO,TERMINADO}
     ListView orders;
     ProgressDialog dialog;
@@ -32,11 +31,9 @@ public class OrdersClients extends AppCompatActivity implements OnItemClickListe
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        layout = R.layout.activity_orders_clients_menu;
+        menuTitle = "Pedidos";
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_orders_clients);
-
-        getSupportActionBar().setTitle("Pedidos");
-
 
         Button buttonPending = (Button)findViewById(R.id.btnPending);
         Button buttonFinished = (Button)findViewById(R.id.btnFinished);
@@ -172,6 +169,9 @@ public class OrdersClients extends AppCompatActivity implements OnItemClickListe
         orders.setOnItemClickListener(OrdersClients.this);
     }
 }
+
+
+
 // My Adapter
 class MyAdapter extends BaseAdapter{
 

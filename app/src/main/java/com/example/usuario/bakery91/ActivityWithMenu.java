@@ -63,26 +63,27 @@ class MenuOption
     }
 }
 
-public class MenuTutorial extends AppCompatActivity {
+public class ActivityWithMenu extends AppCompatActivity {
     private ListView mDrawerList;
     private DrawerLayout mDrawerLayout;
-    private MyAdapterMenu[] mAdapter;
     private ActionBarDrawerToggle mDrawerToggle;
-    private String mActivityTitle;
+    protected int layout = R.layout.activity_menu_tutorial;
+    protected String menuTitle;
     MenuOption[] menuOptions = new MenuOption[4];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu_tutorial);
 
-        mDrawerList = (ListView)findViewById(R.id.navList);
-        mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        mActivityTitle = getTitle().toString();
+        super.onCreate(savedInstanceState);
+        setContentView(layout);
+
+        mDrawerList = findViewById(R.id.navList);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+
 
         addDrawerItems();
         setupDrawer();
 
-        getSupportActionBar().setTitle("Menu Test");
+        getSupportActionBar().setTitle(menuTitle);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
     }
@@ -91,8 +92,8 @@ public class MenuTutorial extends AppCompatActivity {
 
         MenuOption  mainMenu = new MenuOption("Menu Principal",MainActivity.class,R.drawable.ic_home);
         MenuOption  orders = new MenuOption("Pedidos",OrdersClients.class,R.drawable.ic_orders);
-        MenuOption  products = new MenuOption("Productos",MenuTutorial.class,R.drawable.ic_products);
-        MenuOption  salesData = new MenuOption("Datos de ventas",MenuTutorial.class,R.drawable.ic_data);
+        MenuOption  products = new MenuOption("Productos",ActivityWithMenu.class,R.drawable.ic_products);
+        MenuOption  salesData = new MenuOption("Datos de ventas",ActivityWithMenu.class,R.drawable.ic_data);
 
         menuOptions[0] = mainMenu;
         menuOptions[1] = orders;
@@ -105,7 +106,7 @@ public class MenuTutorial extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Class<?> targetActivity = menuOptions[position].getActivityName();
-                Intent intent = new Intent(MenuTutorial.this, targetActivity);
+                Intent intent = new Intent(ActivityWithMenu.this, targetActivity);
                 startActivity(intent);
             }
         });
@@ -117,14 +118,12 @@ public class MenuTutorial extends AppCompatActivity {
             /** Called when a drawer has settled in a completely open state. */
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
-                getSupportActionBar().setTitle("Menu Panaderia91 App");
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
-                getSupportActionBar().setTitle(mActivityTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
