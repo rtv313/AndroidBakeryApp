@@ -1,8 +1,7 @@
 package com.example.usuario.bakery91;
-import java.util.Date;
 
 public class OrderClient {
-    int  id;
+    int id;
     String Name;
     String LastName;
     String Phone;
@@ -10,16 +9,15 @@ public class OrderClient {
     String Note;
     String OrderDate;
 
-   public OrderClient(int id , String Name,String LastName,String Phone, String Status, String Note,String OrderDate)
-   {
-       this.id = id;
-       this.Name = Name;
-       this.LastName = LastName;
-       this.Phone = Phone;
-       this.Status = Status;
-       this.Note = Note;
-       this.OrderDate = OrderDate;
-   }
+    public OrderClient(int id, String Name, String LastName, String Phone, String Status, String Note, String OrderDate) {
+        this.id = id;
+        this.Name = Name;
+        this.LastName = LastName;
+        this.Phone = Phone;
+        this.Status = Status;
+        this.Note = Note;
+        this.OrderDate = OrderDate;
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -28,6 +26,7 @@ public class OrderClient {
     public int getId() {
         return id;
     }
+
     public void setName(String Name) {
         this.Name = Name;
     }
