@@ -6,24 +6,33 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemSelectedListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class OrderActivity extends ActivityWithMenu {
+public class OrderActivity extends ActivityWithMenu implements OnItemSelectedListener,View.OnTouchListener {
 
     private int orderId;
+    private List<String> status = new ArrayList<String>();
     private ProgressDialog dialog;
     private ListView productsView;
     private TextView clientName,clientTel,clientNote,clientTotalPrice;
     private ArrayList<ProductClient> products = new ArrayList<ProductClient>();
+    private  Spinner spinner;
+    private String idClient;
+    private boolean userSelect;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -33,16 +42,45 @@ public class OrderActivity extends ActivityWithMenu {
 
         Intent intent = getIntent();
         int orderId = intent.getIntExtra("OrderId",0);
-        String id  = String.valueOf(orderId);
+        idClient  = String.valueOf(orderId);
 
         clientName = findViewById(R.id.textViewClientName);
         clientTel = findViewById(R.id.textViewTel);
         clientNote = findViewById(R.id.textViewNote);
         clientTotalPrice = findViewById(R.id.textViewPriceTotal);
 
+        status.add("PENDIENTE");
+        status.add("TERMINADO");
+        status.add("CANCELADO");
+
+        userSelect = false;
+        spinner = findViewById(R.id.orderStatus);
+        spinner.setOnItemSelectedListener(this);
+        spinner.setOnTouchListener(this);
         dialog = new ProgressDialog(OrderActivity.this);
         productsView = (ListView) findViewById(R.id.products_list);
-        new GetOrderBreakDown(dialog,this,products,id).execute();
+
+        //CreateOrderStatus("PENDIENTE");
+        new GetOrderBreakDown(dialog,this,products,idClient).execute();
+    }
+
+    @Override
+    public boolean onTouch(View v, MotionEvent event) {
+        userSelect = true;
+        return false;
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
+        if (userSelect) {
+            String statusSelected = status.get(position);
+            new ChangeOrderStatus(statusSelected,statusSelected,this,idClient).execute();
+            userSelect = false;
+        }
+    }
+
+    public void onNothingSelected(AdapterView<?> arg0) {
+
     }
 
     public void createlist() {
@@ -59,6 +97,44 @@ public class OrderActivity extends ActivityWithMenu {
 
     public void NoInternetAlert(){
         Toast.makeText(this,"No hay internet, conectate para ver tus pedido",Toast.LENGTH_LONG).show();
+    }
+
+    public void CreateOrderStatus(String option){
+
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, status);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+
+        switch(option){
+            case "PENDIENTE":
+                spinner.setSelection(0);
+                break;
+
+            case "TERMINADO":
+                spinner.setSelection(1);
+                break;
+
+            case "CANCELADO":
+                spinner.setSelection(2);
+                break;
+
+            default:
+                spinner.setSelection(0);
+                break;
+        }
+    }
+
+    @Override
+    public void onBackPressed(){
+
+        if (menuOpen == false){
+            super.onBackPressed();
+            Intent intent = new Intent(OrderActivity.this, OrdersClients.class);
+            startActivity(intent);
+            finish();
+        }else{
+            this.mDrawerLayout.closeDrawers();
+        }
     }
 }
 

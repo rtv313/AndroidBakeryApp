@@ -65,10 +65,11 @@ class MenuOption
 
 public class ActivityWithMenu extends AppCompatActivity {
     private ListView mDrawerList;
-    private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mDrawerToggle;
+    protected DrawerLayout mDrawerLayout;
+    protected ActionBarDrawerToggle mDrawerToggle;
     protected int layout = R.layout.activity_menu_tutorial;
     protected String menuTitle;
+    protected boolean menuOpen;
     MenuOption[] menuOptions = new MenuOption[4];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,9 +77,10 @@ public class ActivityWithMenu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(layout);
 
+        menuOpen = false;
+
         mDrawerList = findViewById(R.id.navList);
         mDrawerLayout = findViewById(R.id.drawer_layout);
-
 
         addDrawerItems();
         setupDrawer();
@@ -119,12 +121,14 @@ public class ActivityWithMenu extends AppCompatActivity {
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                menuOpen = true;
             }
 
             /** Called when a drawer has settled in a completely closed state. */
             public void onDrawerClosed(View view) {
                 super.onDrawerClosed(view);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                menuOpen = false;
             }
         };
 

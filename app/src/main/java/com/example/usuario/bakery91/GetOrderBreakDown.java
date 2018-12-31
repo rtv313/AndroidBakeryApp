@@ -69,6 +69,7 @@ public class GetOrderBreakDown extends AsyncTask {
 
         ContextOrderClient.createClient(client,totalPrice);
         ContextOrderClient.createlist();
+        ContextOrderClient.CreateOrderStatus(client.getStatus());
 
         if(accessToInternet == false) {
             ContextOrderClient.NoInternetAlert();
@@ -80,7 +81,7 @@ public class GetOrderBreakDown extends AsyncTask {
 
         try {
             JSONObject ordersParameters = new JSONObject();
-            String path = ContextOrderClient.getString(R.string.url_rest_orderClient)+"/"+clientId;
+            String path = ContextOrderClient.getString(R.string.url_rest_orderClient)+clientId;
             URL url = new URL(path);
             Log.d(TAG, "ServerData: " + path);
 

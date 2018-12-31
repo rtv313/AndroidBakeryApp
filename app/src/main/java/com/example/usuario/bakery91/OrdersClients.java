@@ -126,14 +126,6 @@ public class OrdersClients extends ActivityWithMenu implements OnItemClickListen
     }
 
     @Override
-    public void onBackPressed()
-    {
-        super.onBackPressed();
-        startActivity(new Intent(this, MainActivity.class));
-        finish();
-    }
-
-    @Override
     public void onItemClick(AdapterView<?> av ,View v,int position,long id){
         OrderClient order = (OrderClient)orders.getItemAtPosition(position);
         Intent intent = new Intent(OrdersClients.this, OrderActivity.class);
@@ -171,9 +163,20 @@ public class OrdersClients extends ActivityWithMenu implements OnItemClickListen
         orders.setAdapter(adapter);
         orders.setOnItemClickListener(OrdersClients.this);
     }
+
+    @Override
+    public void onBackPressed(){
+
+        if (menuOpen == false){
+            super.onBackPressed();
+            Intent intent = new Intent(OrdersClients.this, MainActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            this.mDrawerLayout.closeDrawers();
+        }
+    }
 }
-
-
 
 // My Adapter
 class MyAdapter extends BaseAdapter{
