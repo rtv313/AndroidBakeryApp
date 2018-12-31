@@ -30,9 +30,10 @@ public class OrderActivity extends ActivityWithMenu implements OnItemSelectedLis
     private ListView productsView;
     private TextView clientName,clientTel,clientNote,clientTotalPrice;
     private ArrayList<ProductClient> products = new ArrayList<ProductClient>();
-    private  Spinner spinner;
+    private Spinner spinner;
     private String idClient;
     private boolean userSelect;
+    private String previousStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -73,8 +74,8 @@ public class OrderActivity extends ActivityWithMenu implements OnItemSelectedLis
     @Override
     public void onItemSelected(AdapterView<?> arg0, View arg1, int position, long id) {
         if (userSelect) {
-            String statusSelected = status.get(position);
-            new ChangeOrderStatus(statusSelected,statusSelected,this,idClient).execute();
+            String actualStatus = status.get(position);
+            new ChangeOrderStatus(actualStatus,previousStatus,this,idClient).execute();
             userSelect = false;
         }
     }
@@ -93,10 +94,15 @@ public class OrderActivity extends ActivityWithMenu implements OnItemSelectedLis
         clientTel.setText(client.getPhone());
         clientNote.setText(client.getNote());
         clientTotalPrice.setText(String.valueOf(totalPrice) +" $");
+        previousStatus = client.getStatus();
     }
 
     public void NoInternetAlert(){
         Toast.makeText(this,"No hay internet, conectate para ver tus pedido",Toast.LENGTH_LONG).show();
+    }
+
+    public void NoInternetAlertForUpdate(){
+        Toast.makeText(this,"No hay internet, conectate para actualizar el pedido",Toast.LENGTH_LONG).show();
     }
 
     public void CreateOrderStatus(String option){

@@ -48,13 +48,14 @@ public class ChangeOrderStatus extends AsyncTask {
 
     @Override
     protected void onPostExecute(Object o) {
+
         super.onPostExecute(o);
 
         if (accessToInternet == true){
             orderActivity.CreateOrderStatus(status);
         }else{
             orderActivity.CreateOrderStatus(previousStatus);
-            orderActivity.NoInternetAlert();
+            orderActivity.NoInternetAlertForUpdate();
         }
     }
 
