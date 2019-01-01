@@ -51,7 +51,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_bg"
             android:layout_margin="20dp"
-            android:text="Datos de ventas"
+            android:text="Resumen de Pedidos"
             android:textStyle="bold"
             />
 

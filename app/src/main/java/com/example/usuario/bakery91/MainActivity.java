@@ -41,8 +41,7 @@ public class MainActivity extends AppCompatActivity {
         buttonSalesData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this,"Datos de ventas Menu",Toast.LENGTH_LONG).show();
-                Intent intent = new Intent(MainActivity.this, ActivityWithMenu.class);
+                Intent intent = new Intent(MainActivity.this, OrdersResume.class);
                 startActivity(intent);
             }
         });

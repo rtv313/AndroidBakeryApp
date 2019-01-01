@@ -70,7 +70,7 @@ public class ActivityWithMenu extends AppCompatActivity {
     protected int layout = R.layout.activity_menu_tutorial;
     protected String menuTitle;
     protected boolean menuOpen;
-    MenuOption[] menuOptions = new MenuOption[4];
+    MenuOption[] menuOptions = new MenuOption[5];
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -96,11 +96,13 @@ public class ActivityWithMenu extends AppCompatActivity {
         MenuOption  orders = new MenuOption("Pedidos",OrdersClients.class,R.drawable.ic_orders);
         MenuOption  products = new MenuOption("Productos",ActivityWithMenu.class,R.drawable.ic_products);
         MenuOption  salesData = new MenuOption("Datos de ventas",ActivityWithMenu.class,R.drawable.ic_data);
+        MenuOption  ordersResume = new MenuOption("Resumen pedidos",OrdersResume.class,R.drawable.ic_orders_resume);
 
         menuOptions[0] = mainMenu;
         menuOptions[1] = orders;
         menuOptions[2] = products;
-        menuOptions[3] = salesData;
+        menuOptions[3] = ordersResume;
+        menuOptions[4] = salesData;
 
         MyAdapterMenu mAdapter = new MyAdapterMenu(this, menuOptions);
         mDrawerList.setAdapter(mAdapter);

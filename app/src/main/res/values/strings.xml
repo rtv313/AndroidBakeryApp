@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Panaderia 91</string>
-    <string name="url_rest_orders">https://pink-treefrog-70.localtunnel.me/Orders/</string>
-    <string name="url_rest_orderClient">https://pink-treefrog-70.localtunnel.me/OrderDetail/</string>
+    <string name="url_rest_orders">https://panaderia91.localtunnel.me/Orders/</string>
+    <string name="url_rest_orderClient">https://panaderia91.localtunnel.me/OrderDetail/</string>
+    <string name="url_rest_ordersResume">https://panaderia91.localtunnel.me/OrdersResume/</string>
     <string name="rest_token">Token 89f39b9d21b410971637dc5a76d60ab85a3a8da8</string>
     <string name="title_activity_menu_tutorial">MenuTutorial</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>

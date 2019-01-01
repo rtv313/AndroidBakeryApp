@@ -44,7 +44,7 @@ public class OrdersClients extends ActivityWithMenu implements OnItemClickListen
         buttonPending.setTextColor(Color.WHITE);
         // Test RESTFUL
         dialog = new ProgressDialog(OrdersClients.this);
-        orders =(ListView) findViewById(R.id.orders_list);
+        orders = findViewById(R.id.orders_list);
         new GetOrders(dialog,this,ordersAbstract,"PENDIENTE").execute();
 
         buttonPending.setOnClickListener(new View.OnClickListener() {
