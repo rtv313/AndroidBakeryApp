@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.support.v4.app.DialogFragment;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +18,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 
 
@@ -188,6 +188,18 @@ public class SalesDataActivity extends ActivityWithMenu  {
 
     public void createlist(){
         CalculateIncome(productsData);
+
+        productsData.sort(new Comparator<ProductDataResume>() {
+            @Override
+            public int compare(ProductDataResume p1, ProductDataResume p2) {
+
+                if(p1.getQuantity() == p2.getQuantity()){
+                    return 0;
+                }
+                return p1.getQuantity() > p2.getQuantity() ? -1 : 1;
+            }
+        });
+
         MyAdapterProductData adapter = new MyAdapterProductData(SalesDataActivity.this, productsData);
         productsDataList.setAdapter(adapter);
     }
