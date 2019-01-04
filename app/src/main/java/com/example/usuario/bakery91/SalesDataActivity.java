@@ -22,7 +22,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 
-public class SalesDataActivity extends AppCompatActivity {
+public class SalesDataActivity extends ActivityWithMenu  {
 
     private ListView productsDataList;
     private ProgressDialog dialog;
@@ -37,8 +37,9 @@ public class SalesDataActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
+        layout = R.layout.activity_sales_data;
+        menuTitle = "Reporte de ventas";
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sales_data);
 
         dialog = new ProgressDialog(SalesDataActivity.this);
 
