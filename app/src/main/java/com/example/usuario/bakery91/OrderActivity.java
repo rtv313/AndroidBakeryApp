@@ -61,7 +61,6 @@ public class OrderActivity extends ActivityWithMenu implements OnItemSelectedLis
         dialog = new ProgressDialog(OrderActivity.this);
         productsView = (ListView) findViewById(R.id.products_list);
 
-        //CreateOrderStatus("PENDIENTE");
         new GetOrderBreakDown(dialog,this,products,idClient).execute();
     }
 

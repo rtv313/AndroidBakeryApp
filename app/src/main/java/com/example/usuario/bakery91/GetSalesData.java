@@ -3,7 +3,6 @@ package com.example.usuario.bakery91;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ListView;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -19,23 +18,23 @@ import javax.net.ssl.HttpsURLConnection;
 
 import static android.content.ContentValues.TAG;
 
-class GetOrders extends AsyncTask {
+public class GetSalesData extends AsyncTask {
 
-    private OrdersClients ContextOrderClients;
+    private SalesDataActivity salesDataActivity;
     private ProgressDialog progressDialog;
     private StringBuffer response;
     private String responseText;
-    private ArrayList<OrderClient> orders;
-    private String orderStatus;
+    private String firstDate;
+    private String secondDate;
+    private ArrayList<ProductDataResume> datasResumeList;
     private boolean accessToInternet;
 
-    public GetOrders(ProgressDialog progressDialog,OrdersClients ContextOrderClients,ArrayList<OrderClient> orders,String orderStatus)
-    {
+    public GetSalesData(SalesDataActivity salesDataActivity,ProgressDialog progressDialog,ArrayList<ProductDataResume> datasResumeList,String firstDate,String secondDate){
+        this.salesDataActivity = salesDataActivity;
         this.progressDialog = progressDialog;
-        this.ContextOrderClients = ContextOrderClients;
-        this.orders = orders;
-        this.orderStatus = orderStatus;
-
+        this.datasResumeList = datasResumeList;
+        this.firstDate = firstDate;
+        this.secondDate = secondDate;
     }
 
     @Override
@@ -43,11 +42,11 @@ class GetOrders extends AsyncTask {
         super.onPreExecute();
 
         // Showing progress dialog
-        progressDialog = new ProgressDialog(ContextOrderClients);
-        progressDialog.setMessage("Cargando Pedidos");
+        progressDialog = new ProgressDialog(salesDataActivity);
+        progressDialog.setMessage("Cargando Datos");
         progressDialog.setCancelable(false);
         progressDialog.show();
-        orders.clear();
+        datasResumeList.clear();
     }
 
     @Override
@@ -56,7 +55,6 @@ class GetOrders extends AsyncTask {
         return getWebServiceResponseData();
     }
 
-
     @Override
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
@@ -64,28 +62,28 @@ class GetOrders extends AsyncTask {
         if (progressDialog.isShowing())
             progressDialog.dismiss();
 
-        ContextOrderClients.createlist();
+        salesDataActivity.createlist();
 
         if(accessToInternet == false)
-            ContextOrderClients.NoInternetAlert();
+            salesDataActivity.NoInternetAlert();
     }
-
 
     protected Void getWebServiceResponseData(){
 
         try {
             JSONObject ordersParameters = new JSONObject();
-            ordersParameters.put("Status",orderStatus);
-            String path = ContextOrderClients.getString(R.string.url_rest_orders);
+            ordersParameters.put("firstDate",firstDate);
+            ordersParameters.put("secondDate",secondDate);
+            String path = salesDataActivity.getString(R.string.url_rest_salesReport);
             URL url = new URL(path);
             Log.d(TAG, "ServerData: " + path);
 
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setReadTimeout(15000);
             conn.setConnectTimeout(15000);
-            conn.setRequestMethod("PUT");
+            conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type","application/json");
-            conn.setRequestProperty("Authorization",ContextOrderClients.getString(R.string.rest_token));
+            conn.setRequestProperty("Authorization",salesDataActivity.getString(R.string.rest_token));
             conn.setDoOutput(true);
             OutputStream os = conn.getOutputStream();
             String json = ordersParameters.toString();
@@ -121,19 +119,14 @@ class GetOrders extends AsyncTask {
             responseText = response.toString();
             JSONArray jsonarray = new JSONArray(responseText);
             for (int i = 0; i < jsonarray.length(); i++) {
-                JSONObject jsonobject = jsonarray.getJSONObject(i);
-                int id = jsonobject.getInt("id");
-                String Name = jsonobject.getString("Name");
-                String LastName = jsonobject.getString("LastName");
-                String Phone = jsonobject.getString("Phone");
-                String Status = jsonobject.getString("Status");
-                String Note = jsonobject.getString("Note");
-                String OrderDate = jsonobject.getString("OrderDate");
 
-                Log.d(TAG, "id:" + id);
-                Log.d(TAG, "Name:" + Name);
-                OrderClient order = new OrderClient(id,Name,LastName,Phone,Status,Note,OrderDate);
-                orders.add(order);
+                JSONObject jsonobject = jsonarray.getJSONObject(i);
+                String ProductName = jsonobject.getString("ProductName");
+                int Quantity = jsonobject.getInt("Quantity");
+                float Cost = (float)jsonobject.getDouble("Cost");
+                float Price = (float)jsonobject.getDouble("Price");
+                ProductDataResume productData = new ProductDataResume(ProductName,Quantity,Cost,Price);
+                datasResumeList.add(productData);
             }
 
         } catch (Exception e) {
@@ -141,4 +134,5 @@ class GetOrders extends AsyncTask {
         }
         return null;
     }
+
 }

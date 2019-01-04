@@ -61,7 +61,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/button_bg"
             android:layout_margin="20dp"
-            android:text="Usuarios"
+            android:text="Datos de ventas"
             android:textStyle="bold"
             />
 

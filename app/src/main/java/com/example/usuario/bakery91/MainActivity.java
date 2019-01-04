@@ -49,8 +49,8 @@ public class MainActivity extends AppCompatActivity {
         buttonUsers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                MyNotificationManager.getInstance(MainActivity.this).displayNotification("Nuevo Pedido", "");
-                Toast.makeText(MainActivity.this,"Usuarios Menu",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this, SalesDataActivity.class);
+                startActivity(intent);
             }
         });
     }
