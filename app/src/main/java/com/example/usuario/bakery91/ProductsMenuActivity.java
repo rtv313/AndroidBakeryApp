@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,17 +19,31 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class ProductsMenuActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class ProductsMenuActivity extends ActivityWithMenu implements AdapterView.OnItemClickListener {
     private ListView productsView;
     private ProgressDialog dialog;
     private ArrayList<Product> products = new ArrayList<Product>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        layout = R.layout.activity_products_menu;
+        menuTitle = "Productos";
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_products_menu);
+
         productsView = findViewById(R.id.products_list);
         dialog = new ProgressDialog(ProductsMenuActivity.this);
+
+        Button BtnAddProduct = findViewById(R.id.btnAddProduct);
+
+        BtnAddProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ProductsMenuActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
         new GetProducts(this,dialog,products).execute();
     }
 

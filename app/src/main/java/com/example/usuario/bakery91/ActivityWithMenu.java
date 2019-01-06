@@ -94,8 +94,8 @@ public class ActivityWithMenu extends AppCompatActivity {
 
         MenuOption  mainMenu = new MenuOption("Menu Principal",MainActivity.class,R.drawable.ic_home);
         MenuOption  orders = new MenuOption("Pedidos",OrdersClients.class,R.drawable.ic_orders);
-        MenuOption  products = new MenuOption("Productos",ActivityWithMenu.class,R.drawable.ic_products);
-        MenuOption  salesData = new MenuOption("Reporte de ventas",ActivityWithMenu.class,R.drawable.ic_data);
+        MenuOption  products = new MenuOption("Productos",ProductsMenuActivity.class,R.drawable.ic_products);
+        MenuOption  salesData = new MenuOption("Reporte de ventas",SalesDataActivity.class,R.drawable.ic_data);
         MenuOption  ordersResume = new MenuOption("Resumen pedidos",OrdersResume.class,R.drawable.ic_orders_resume);
 
         menuOptions[0] = mainMenu;
