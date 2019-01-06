@@ -4,13 +4,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
 
 
 public class MainActivity extends AppCompatActivity {
-    Button buttonOrders,buttonProducts,buttonSalesData,buttonUsers;
+    Button buttonOrders,buttonProducts, buttonOrdersResume, buttonSalesData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
 
         buttonOrders = (Button)findViewById(R.id.btnOrders);
         buttonProducts = (Button)findViewById(R.id.btnProducts);
-        buttonSalesData = (Button)findViewById(R.id.btnSalesData);
-        buttonUsers = (Button)findViewById(R.id.btnUsers);
+        buttonOrdersResume = (Button)findViewById(R.id.btnSalesData);
+        buttonSalesData = (Button)findViewById(R.id.btnUsers);
 
         FirebaseMessaging.getInstance().subscribeToTopic("NuevosPedidos");
 
@@ -34,11 +33,12 @@ public class MainActivity extends AppCompatActivity {
         buttonProducts.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MainActivity.this,"Productos Menu",Toast.LENGTH_LONG).show();
+                Intent intent = new Intent(MainActivity.this, ProductsMenuActivity.class);
+                startActivity(intent);
             }
         });
 
-        buttonSalesData.setOnClickListener(new View.OnClickListener() {
+        buttonOrdersResume.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, OrdersResume.class);
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        buttonUsers.setOnClickListener(new View.OnClickListener() {
+        buttonSalesData.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, SalesDataActivity.class);

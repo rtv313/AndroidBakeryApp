@@ -138,7 +138,7 @@ public class OrdersClients extends ActivityWithMenu implements OnItemClickListen
         MyAdapter adapter = new MyAdapter(this, ordersAbstract);
         orders.setAdapter(adapter);
         orders.setOnItemClickListener(this);
-        EditText searchBox = (EditText)findViewById(R.id.searchText);
+        EditText searchBox = findViewById(R.id.searchText);
         filterList(searchBox.getText().toString());
     }
 

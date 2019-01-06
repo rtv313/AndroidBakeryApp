@@ -58,7 +58,8 @@
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity android:name=".OrdersResume" />
-        <activity android:name=".SalesDataActivity"></activity>
+        <activity android:name=".SalesDataActivity" />
+        <activity android:name=".ProductsMenuActivity"></activity>
     </application>
 
 </manifest>
