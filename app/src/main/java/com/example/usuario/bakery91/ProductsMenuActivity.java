@@ -39,7 +39,7 @@ public class ProductsMenuActivity extends ActivityWithMenu implements AdapterVie
         BtnAddProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ProductsMenuActivity.this, MainActivity.class);
+                Intent intent = new Intent(ProductsMenuActivity.this, AddProductActivity.class);
                 startActivity(intent);
             }
         });

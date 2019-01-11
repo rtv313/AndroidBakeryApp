@@ -6,4 +6,5 @@
     <color name="white">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorDivider">#B6B6B6</color>
+    <color name="colorEditText">#d6d5d4</color>
 </resources>

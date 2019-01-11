@@ -64,7 +64,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/content/ic_add_box_black_24dp.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_add_shopping_cart_black_24dp.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -74,9 +74,12 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="color" value="000002" />
-                            <entry key="outputName" value="ic_add_box" />
+                            <entry key="color" value="726d6e" />
+                            <entry key="height" value="128" />
+                            <entry key="outputName" value="ic_add_product_image" />
+                            <entry key="overrideSize" value="true" />
                             <entry key="sourceFile" value="C:\Users\Usuario" />
+                            <entry key="width" value="128" />
                           </map>
                         </option>
                       </PersistentState>
