@@ -41,6 +41,7 @@ public class ProductsMenuActivity extends ActivityWithMenu implements AdapterVie
             public void onClick(View v) {
                 Intent intent = new Intent(ProductsMenuActivity.this, AddProductActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 
