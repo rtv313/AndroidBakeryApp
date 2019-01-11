@@ -21,7 +21,7 @@ import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 import java.net.URI;
 
-public class AddProductActivity extends Activity {
+public class AddProductActivity extends ActivityWithMenu {
     Button buttonAddProduct;
     EditText editTextName,editTextCost,editTextPrice;
     ImageView imgView;
@@ -31,8 +31,10 @@ public class AddProductActivity extends Activity {
     boolean biggerThan1mb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        layout = R.layout.activity_add_product;
+        menuTitle = "Agregar Producto";
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_product);
 
         editTextName = findViewById(R.id.editTextName);
         editTextPrice = findViewById(R.id.editTextPrice);
@@ -135,6 +137,19 @@ public class AddProductActivity extends Activity {
         } catch (Exception e) {
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
             selectedImage = Uri.EMPTY;
+        }
+    }
+
+    @Override
+    public void onBackPressed(){
+
+        if (menuOpen == false){
+            super.onBackPressed();
+            Intent intent = new Intent(AddProductActivity.this, ProductsMenuActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            this.mDrawerLayout.closeDrawers();
         }
     }
 }

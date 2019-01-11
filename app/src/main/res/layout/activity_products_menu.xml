@@ -32,6 +32,12 @@
                 android:text="Agregar"
                 android:textStyle="bold" />
 
+            <View
+                android:layout_marginTop="15dp"
+                android:layout_width="fill_parent"
+                android:layout_height="5dp"
+                android:background="#c0c0c0"/>
+
             <ListView
                 android:id="@+id/products_list"
                 android:layout_width="match_parent"
