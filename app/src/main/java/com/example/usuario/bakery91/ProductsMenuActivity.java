@@ -52,9 +52,10 @@ public class ProductsMenuActivity extends ActivityWithMenu implements AdapterVie
     @Override
     public void onItemClick(AdapterView<?> av , View v, int position, long id){
         Product product = (Product)productsView.getItemAtPosition(position);
-        Intent intent = new Intent(ProductsMenuActivity.this, MainActivity.class);
+        Intent intent = new Intent(ProductsMenuActivity.this, UpdateProductActivity.class);
         intent.putExtra("ProductId",product.getId());
         startActivity(intent);
+        finish();
     }
 
 

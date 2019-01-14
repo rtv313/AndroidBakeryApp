@@ -1,40 +1,38 @@
 package com.example.usuario.bakery91;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.app.Activity;
-import android.provider.MediaStore;
 import android.text.TextUtils;
-import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.ByteArrayOutputStream;
-import java.net.URI;
+public class UpdateProductActivity extends AppCompatActivity {
 
-public class AddProductActivity extends ActivityWithMenu {
-    Button buttonAddProduct;
+    Button btnUpdateProduct,btnDeleteProduct;
     EditText editTextName,editTextCost,editTextPrice;
     ImageView imgView;
     private ProgressDialog dialog;
     private static int RESULT_LOAD_IMG = 1;
     Uri selectedImage = Uri.EMPTY;
+    private ProductDetail productDetail;
+    private String productId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        layout = R.layout.activity_add_product;
-        menuTitle = "Agregar Producto";
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_update_product);
+
+        Intent intent = getIntent();
+        int id = intent.getIntExtra("ProductId",0);
+        productId  = String.valueOf(id);
 
         editTextName = findViewById(R.id.editTextName);
         editTextPrice = findViewById(R.id.editTextPrice);
@@ -48,23 +46,43 @@ public class AddProductActivity extends ActivityWithMenu {
             }
         });
 
-        buttonAddProduct = findViewById(R.id.btnAddProduct);
-        buttonAddProduct.setOnClickListener(new View.OnClickListener() {
+        btnUpdateProduct = findViewById(R.id.btnUpdateProduct);
+        btnUpdateProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 boolean valid = ValidateInputFields();
 
                 if (valid == true) {
                     String Name = editTextName.getText().toString();
                     float Price  = Float.parseFloat(editTextPrice.getText().toString());
                     float Cost  = Float.parseFloat(editTextCost.getText().toString());
-                    new AddProduct(AddProductActivity.this, selectedImage, dialog, Name, Price, Cost).execute();
                 }
             }
         });
 
-        dialog = new ProgressDialog(AddProductActivity.this);
+        dialog = new ProgressDialog(UpdateProductActivity.this);
+        productDetail = new ProductDetail(1,"name",0.0f,0.0f,"url");
+        new GetProduct(dialog,productId,UpdateProductActivity.this,productDetail).execute();
+
+        btnDeleteProduct = findViewById(R.id.btnDeleteProduct);
+        btnDeleteProduct.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new DeleteProduct(productDetail.getId(),dialog,UpdateProductActivity.this).execute();
+            }
+        });
     }
+
+    public void SetProductDetail(){
+        // Here we set the EditTexts and image
+        editTextName.setText(productDetail.getName(), TextView.BufferType.EDITABLE);
+        editTextPrice.setText(String.valueOf(productDetail.getPrice()),TextView.BufferType.EDITABLE);
+        editTextCost.setText(String.valueOf(productDetail.getProductionCost()),TextView.BufferType.EDITABLE);
+        String URL = this.getString(R.string.url_rest_image) + productDetail.getImageUrl();
+        new DownloadImage((ImageView)findViewById(R.id.imgView),this).execute(URL);
+    }
+
 
     public boolean ValidateInputFields(){
 
@@ -94,7 +112,6 @@ public class AddProductActivity extends ActivityWithMenu {
             Toast.makeText(getBaseContext(), "Selecciona una foto", Toast.LENGTH_LONG).show();
             return false;
         }
-
         return true;
     }
 
@@ -106,8 +123,12 @@ public class AddProductActivity extends ActivityWithMenu {
         Toast.makeText(this,"Ya hay un producto con este nombre",Toast.LENGTH_LONG).show();
     }
 
-    public void ProductCreated(){
-        Toast.makeText(this,"Producto Creado!",Toast.LENGTH_LONG).show();
+    public void ProductDeleted(){
+        Toast.makeText(this,"Producto Borrado!",Toast.LENGTH_LONG).show();
+    }
+
+    public void ProductNoDeleted(){
+        Toast.makeText(this,"El producto no se puede borrar porque hay pedidos pendientes de el ",Toast.LENGTH_LONG).show();
     }
 
     public void ImageIsToBig(){
@@ -119,6 +140,7 @@ public class AddProductActivity extends ActivityWithMenu {
         Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         startActivityForResult(galleryIntent, RESULT_LOAD_IMG);
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -137,19 +159,6 @@ public class AddProductActivity extends ActivityWithMenu {
         } catch (Exception e) {
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
             selectedImage = Uri.EMPTY;
-        }
-    }
-
-    @Override
-    public void onBackPressed(){
-
-        if (menuOpen == false){
-            super.onBackPressed();
-            Intent intent = new Intent(AddProductActivity.this, ProductsMenuActivity.class);
-            startActivity(intent);
-            finish();
-        }else{
-            this.mDrawerLayout.closeDrawers();
         }
     }
 }

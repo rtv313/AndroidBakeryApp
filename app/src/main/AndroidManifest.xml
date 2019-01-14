@@ -64,7 +64,8 @@
         <activity android:name=".ProductsMenuActivity" />
         <activity
             android:name=".AddProductActivity"
-            android:label="@string/title_activity_add_product"></activity>
+            android:label="@string/title_activity_add_product" />
+        <activity android:name=".UpdateProductActivity"></activity>
     </application>
 
 </manifest>

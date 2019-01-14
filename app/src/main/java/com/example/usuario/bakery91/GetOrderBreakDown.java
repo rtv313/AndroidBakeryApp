@@ -132,8 +132,6 @@ public class GetOrderBreakDown extends AsyncTask {
             client.setOrderDate((String)clientJson.get("OrderDate"));
 
             JSONArray productsJSON = (JSONArray)json.get("Products");
-           // JSONObject jsonobject = (JSONObject) productsJSON.get(0);
-           // String x  = (String)jsonobject.get("name");
             totalPrice = 0.0f;
 
             for (int i = 0; i < productsJSON.size(); i++) {
