@@ -59,12 +59,16 @@
             android:name=".OrderActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
-        <activity android:name=".OrdersResume" />
-        <activity android:name=".SalesDataActivity" />
-        <activity android:name=".ProductsMenuActivity" />
+        <activity android:name=".OrdersResume"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SalesDataActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ProductsMenuActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".AddProductActivity"
-            android:label="@string/title_activity_add_product" />
+            android:label="@string/title_activity_add_product"
+            android:screenOrientation="portrait"/>
         <activity android:name=".UpdateProductActivity"></activity>
     </application>
 

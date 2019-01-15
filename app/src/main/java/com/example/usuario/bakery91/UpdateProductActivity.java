@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class UpdateProductActivity extends AppCompatActivity {
+public class UpdateProductActivity extends ActivityWithMenu {
 
     Button btnUpdateProduct,btnDeleteProduct;
     EditText editTextName,editTextCost,editTextPrice;
@@ -26,9 +26,9 @@ public class UpdateProductActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        layout = R.layout.activity_update_product;
+        menuTitle = "Producto";
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_product);
 
         Intent intent = getIntent();
         int id = intent.getIntExtra("ProductId",0);
@@ -57,6 +57,9 @@ public class UpdateProductActivity extends AppCompatActivity {
                     String Name = editTextName.getText().toString();
                     float Price  = Float.parseFloat(editTextPrice.getText().toString());
                     float Cost  = Float.parseFloat(editTextCost.getText().toString());
+                    int id  = Integer.parseInt(productId);
+                    ProductDetail  productDetail = new ProductDetail(id,Name,Price,Cost,"");
+                    new UpdateProduct(UpdateProductActivity.this,dialog,productDetail,selectedImage).execute();
                 }
             }
         });
@@ -83,7 +86,6 @@ public class UpdateProductActivity extends AppCompatActivity {
         new DownloadImage((ImageView)findViewById(R.id.imgView),this).execute(URL);
     }
 
-
     public boolean ValidateInputFields(){
 
         String Name = editTextName.getText().toString();
@@ -107,11 +109,6 @@ public class UpdateProductActivity extends AppCompatActivity {
             return false;
         }
 
-
-        if(selectedImage == Uri.EMPTY){
-            Toast.makeText(getBaseContext(), "Selecciona una foto", Toast.LENGTH_LONG).show();
-            return false;
-        }
         return true;
     }
 
@@ -124,11 +121,18 @@ public class UpdateProductActivity extends AppCompatActivity {
     }
 
     public void ProductDeleted(){
-        Toast.makeText(this,"Producto Borrado!",Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(UpdateProductActivity.this, ProductsMenuActivity.class);
+        intent.putExtra("FromDeletedProduct",true);
+        startActivity(intent);
+        finish();
     }
 
     public void ProductNoDeleted(){
-        Toast.makeText(this,"El producto no se puede borrar porque hay pedidos pendientes de el ",Toast.LENGTH_LONG).show();
+        Toast.makeText(this,"El producto no se puede borrar porque hay pedidos pendientes de el",Toast.LENGTH_LONG).show();
+    }
+
+    public void ProductUpdated(){
+        Toast.makeText(this,"El producto se actualizo",Toast.LENGTH_LONG).show();
     }
 
     public void ImageIsToBig(){
@@ -159,6 +163,19 @@ public class UpdateProductActivity extends AppCompatActivity {
         } catch (Exception e) {
             Toast.makeText(this, "Something went wrong", Toast.LENGTH_LONG).show();
             selectedImage = Uri.EMPTY;
+        }
+    }
+
+    @Override
+    public void onBackPressed(){
+
+        if (menuOpen == false){
+            super.onBackPressed();
+            Intent intent = new Intent(UpdateProductActivity.this, ProductsMenuActivity.class);
+            startActivity(intent);
+            finish();
+        }else{
+            this.mDrawerLayout.closeDrawers();
         }
     }
 }

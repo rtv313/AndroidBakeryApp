@@ -45,6 +45,13 @@ public class ProductsMenuActivity extends ActivityWithMenu implements AdapterVie
             }
         });
 
+        Intent intent = getIntent();
+        boolean fromDeleteProduct = intent.getBooleanExtra("FromDeletedProduct",false);
+
+        if(fromDeleteProduct==true){
+            Toast.makeText(this,"Producto borrado",Toast.LENGTH_LONG).show();
+        }
+
         new GetProducts(this,dialog,products).execute();
     }
 
