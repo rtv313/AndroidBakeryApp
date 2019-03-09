@@ -63,7 +63,7 @@ public class UpdateProduct extends AsyncTask {
     {
         Bitmap bm = BitmapFactory.decodeFile(imagePath);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bm.compress(Bitmap.CompressFormat.JPEG, 85, baos);
+        bm.compress(Bitmap.CompressFormat.JPEG, 60, baos);
         byte[] byteArrayImage = baos.toByteArray();
         long imageSize = byteArrayImage.length; // convert to MB
         float imageSizeKb = (float)imageSize/1024;
