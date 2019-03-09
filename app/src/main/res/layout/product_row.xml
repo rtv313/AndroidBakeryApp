@@ -13,7 +13,8 @@
 
     <TextView
         android:id="@+id/txtProductName"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_width="70dp"
         android:layout_height="wrap_content"
         android:text="Pan de muerto"
@@ -24,7 +25,8 @@
 
         <TextView
             android:id="@+id/txtProductPrice"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
