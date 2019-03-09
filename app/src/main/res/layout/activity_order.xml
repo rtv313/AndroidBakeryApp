@@ -166,21 +166,20 @@
                 android:background="#c0c0c0"/>
 
             <LinearLayout
-                android:layout_marginTop="15dp"
-                android:layout_marginLeft="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
                 android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:weightSum="3">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:textStyle="bold"
-                    android:text="Productos"
-                    android:textSize="24sp"
                     android:gravity="center"
-                    android:layout_marginTop = "0dp"/>
+                    android:text="Productos"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -188,9 +187,9 @@
                     android:layout_centerHorizontal="true"
                     android:textStyle="bold"
                     android:text="Cantidad"
-                    android:textSize="24sp"
-                    android:gravity="center"
-                    android:layout_marginLeft = "50dp"/>
+                    android:textSize="20sp"
+                    android:layout_weight="1"
+                    android:gravity="center" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -198,9 +197,10 @@
                     android:layout_centerHorizontal="true"
                     android:textStyle="bold"
                     android:text="Precio"
-                    android:textSize="24sp"
+                    android:textSize="20sp"
+                    android:layout_weight="1"
                     android:gravity="center"
-                    android:layout_marginLeft = "20dp"/>
+                    />
 
             </LinearLayout>
 

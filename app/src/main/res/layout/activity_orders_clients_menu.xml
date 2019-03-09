@@ -46,12 +46,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="3">
 
                     <Button
                         android:id="@+id/btnPending"
-                        android:layout_width="125dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:layout_margin="1dp"
                         android:background="@drawable/button_bg"
                         android:text="Pendientes"
@@ -59,8 +61,9 @@
 
                     <Button
                         android:id="@+id/btnFinished"
-                        android:layout_width="125dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:layout_margin="1dp"
                         android:background="@drawable/button_bg"
                         android:text="Terminados"
@@ -68,8 +71,9 @@
 
                     <Button
                         android:id="@+id/btnCancel"
-                        android:layout_width="125dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:layout_margin="1dp"
                         android:background="@drawable/button_bg"
                         android:text="Cancelados"
