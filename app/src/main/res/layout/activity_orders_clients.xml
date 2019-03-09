@@ -28,34 +28,37 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
+            android:layout_alignParentBottom="true"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnPending"
-                android:layout_width="125dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
+                android:layout_weight="1"
                 android:background="@drawable/button_bg"
-                android:text="Pendientes"
+                android:text="adfadsfasdfasdfadsfp"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnFinished"
-                android:layout_width="125dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
+                android:layout_weight="1"
                 android:background="@drawable/button_bg"
-                android:text="Terminados"
+                android:text="t"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/btnCancel"
-                android:layout_width="125dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="1dp"
+                android:layout_weight="1"
                 android:background="@drawable/button_bg"
-                android:text="Cancelados"
+                android:text="c"
                 android:textStyle="bold" />
         </LinearLayout>
 
