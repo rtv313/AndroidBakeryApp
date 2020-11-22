@@ -2,4 +2,4 @@
 
 Administration app for a small bakery bussiness
 
-![Menu](https://1drv.ms/u/s!AgicexInADUajWvSOXqPUxlRI0Ej?e=zhY400)
+![image info](https://drive.google.com/file/d/14tivu0YkrGwtiAsLVlxtw_JJxc_Z9q3D/view)
